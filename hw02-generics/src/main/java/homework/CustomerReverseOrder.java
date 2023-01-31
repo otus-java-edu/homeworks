@@ -5,13 +5,13 @@ import java.util.LinkedList;
 
 public class CustomerReverseOrder {
 
-    private final LinkedList<Customer> customerLinkedList = new LinkedList<>();
+    private final LinkedList<Customer> customerDeque = new LinkedList<>();
 
     public void add(Customer customer) {
-        customerLinkedList.add(customer);
+        customerDeque.add(customer);
     }
 
     public Customer take() {
-        return customerLinkedList.pollLast();
+        return customerDeque.pollLast();
     }
 }
