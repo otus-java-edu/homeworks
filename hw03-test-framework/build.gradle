@@ -1,0 +1,14 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow'
+}
+dependencies {
+    implementation project(path: ':hw02-generics')
+}
+shadowJar {
+    manifest {
+        attributes 'Main-Class': 'Tester'
+    }
+}
+
+tasks.build.dependsOn tasks.shadowJar
