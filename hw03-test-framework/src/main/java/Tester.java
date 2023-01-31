@@ -9,7 +9,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class Tester {
-
     public static void main(String[] args){
         if (args.length < 1)
             return;
@@ -40,10 +39,15 @@ public class Tester {
                     instance = constructor.newInstance();
                 } catch (Exception e) {
                     System.out.println(String.format("Error on Instantiating by constructor: %s", e.getMessage()));
+                    failedTests++;
+                    break;
                 }
-                if (!ExecuteMethod(instance, beforeMethod))
-                    ExecuteMethod(instance, afterMethod);
-                if (ExecuteMethod(instance, Optional.ofNullable(test))) {
+                if (!executeMethod(instance, beforeMethod)) {
+                    executeMethod(instance, afterMethod);
+                    failedTests++;
+                    break;
+                }
+                if (executeMethod(instance, Optional.ofNullable(test))) {
                     System.out.println(String.format("Test %s is passed", test.getName()));
                     passedTests++;
                 }
@@ -51,17 +55,17 @@ public class Tester {
                     System.out.println(String.format("Test %s is failed", test.getName()));
                     failedTests++;
                 }
-                ExecuteMethod(instance, afterMethod);
+                executeMethod(instance, afterMethod);
             }
 
             System.out.println("==========================================================================");
-            System.out.println(String.format("Total tests: %d", passedTests + failedTests));
+            System.out.println(String.format("Total processed tests: %d", passedTests + failedTests));
             System.out.println(String.format("Passed tests: %d", passedTests));
             System.out.println(String.format("Failed tests: %d", failedTests));
         }
     }
 
-    private static boolean ExecuteMethod(Object obj, Optional<Method> method)
+    private static boolean executeMethod(Object obj, Optional<Method> method)
     {
         if (method.isPresent()) {
             try {
