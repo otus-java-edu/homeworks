@@ -4,10 +4,11 @@ plugins {
 }
 dependencies {
     implementation project(path: ':hw02-generics')
+    implementation 'org.projectlombok:lombok:1.18.22'
 }
 shadowJar {
     manifest {
-        attributes 'Main-Class': 'Tester'
+        attributes 'Main-Class': 'StarterUtil'
     }
 }
 
