@@ -1,7 +1,6 @@
 package IoC;
 
 import Annotations.Log;
-import TestClass.TestLogging;
 import TestClass.TestLoggingInterface;
 
 import java.lang.reflect.InvocationHandler;
@@ -16,7 +15,7 @@ public class Ioc {
     private Ioc() {
     }
 
-    public static TestLoggingInterface Register(TestLoggingInterface obj) {
+    public static TestLoggingInterface register(TestLoggingInterface obj) {
         InvocationHandler handler = new DemoInvocationHandler(obj);
         return (TestLoggingInterface) Proxy.newProxyInstance(Ioc.class.getClassLoader(),
                 new Class<?>[]{TestLoggingInterface.class}, handler);
