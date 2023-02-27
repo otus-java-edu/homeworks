@@ -1,9 +1,10 @@
 package atm;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class Cash {
-    private final HashMap<BanknoteType, Integer> moneyMap;
+    private final Map<BanknoteType, Integer> moneyMap;
 
     public Cash() {
         moneyMap = new HashMap<>();
@@ -18,7 +19,7 @@ public class Cash {
             moneyMap.replace(type, moneyMap.get(type) + count);
     }
 
-    public HashMap<BanknoteType, Integer> getMoneyMap(){return moneyMap;}
+    public Map<BanknoteType, Integer> getMoneyMap(){return moneyMap;}
 
     public int count() {
         return moneyMap.entrySet().stream().mapToInt(pair -> pair.getKey().getValue() * pair.getValue()).sum();

@@ -1,4 +1,4 @@
-package atm.interfaces;
+package atm;
 
 public interface Cassette {
     int getCapacity();

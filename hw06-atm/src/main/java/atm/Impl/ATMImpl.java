@@ -1,9 +1,11 @@
-package atm;
+package atm.Impl;
 
+import atm.BanknoteType;
+import atm.Cash;
 import atm.Exceptions.InsufficientCapacityException;
 import atm.Exceptions.InsufficientVolumeException;
-import atm.interfaces.ATM;
-import atm.interfaces.Cassette;
+import atm.ATM;
+import atm.Cassette;
 
 import java.util.HashMap;
 

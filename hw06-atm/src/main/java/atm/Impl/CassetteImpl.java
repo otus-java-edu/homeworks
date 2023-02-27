@@ -1,8 +1,8 @@
-package atm;
+package atm.Impl;
 
 import atm.Exceptions.InsufficientCapacityException;
 import atm.Exceptions.InsufficientVolumeException;
-import atm.interfaces.Cassette;
+import atm.Cassette;
 
 public class CassetteImpl implements Cassette {
     private final int capacity;
