@@ -1,10 +1,10 @@
 package atm.tests;
 
-import atm.ATMImpl;
+import atm.ATM;
+import atm.Impl.ATMImpl;
 import atm.BanknoteType;
 import atm.Exceptions.InsufficientCapacityException;
 import atm.Exceptions.InsufficientVolumeException;
-import atm.interfaces.ATM;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,7 +18,7 @@ public class ATMTests {
     @BeforeEach
     void Setup()
     {
-        atm = new ATMImpl(100, 100);
+        atm = new ATMImpl(100, 50);
     }
 
     @Test
