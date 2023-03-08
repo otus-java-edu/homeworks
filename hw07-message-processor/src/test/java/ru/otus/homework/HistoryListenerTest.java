@@ -2,7 +2,7 @@ package ru.otus.homework;
 
 
 import org.junit.jupiter.api.Test;
-import ru.otus.listener.homework.HistoryListener;
+import ru.otus.listener.impl.HistoryListener;
 import ru.otus.model.Message;
 import ru.otus.model.ObjectForMessage;
 

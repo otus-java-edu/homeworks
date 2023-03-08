@@ -1,5 +1,6 @@
-package ru.otus.listener.homework;
+package ru.otus.listener.impl;
 
+import ru.otus.listener.HistoryReader;
 import ru.otus.listener.Listener;
 import ru.otus.model.Message;
 
