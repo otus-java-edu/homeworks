@@ -31,10 +31,19 @@ public class ClientsApiServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         var id = extractIdFromRequest(request);
         String result;
-        if (id < 0)
-            result = gson.toJson(dbServiceClient.findAll().stream().map(ClientDTO::fromClient).toList());
-        else
-            result = gson.toJson(dbServiceClient.getClient(id).orElse(null));
+        if (id < 0){
+            var resultList = dbServiceClient.findAll().stream().map(ClientDTO::fromClient).toList();
+            result = gson.toJson(resultList);
+        }
+        else{
+
+            var found = dbServiceClient.getClient(id);
+            if (found.isPresent())
+                result = null;
+            else{
+                result = gson.toJson(ClientDTO.fromClient(found.get()));
+            }
+        }
         response.setContentType("application/json;charset=UTF-8");
         ServletOutputStream out = response.getOutputStream();
         out.print(result);
@@ -43,9 +52,9 @@ public class ClientsApiServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         var newClient = gson.fromJson(request.getReader(), ClientDTO.class);
-        var client = dbServiceClient.saveClient(new Client(null, newClient.name,
-                new Address(null, newClient.address),
-                newClient.phones.stream().map(p->new Phone(null, p)).toList()));
+        var client = dbServiceClient.saveClient(new Client(null, newClient.getName(),
+                new Address(null, newClient.getAddress()),
+                newClient.getPhones().stream().map(p->new Phone(null, p)).toList()));
         response.setContentType("application/json;charset=UTF-8");
         ServletOutputStream out = response.getOutputStream();
         var result = gson.toJson(client.toString());

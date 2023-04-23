@@ -1,16 +1,18 @@
 package ru.otus.servlet.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import ru.otus.crm.model.Address;
 import ru.otus.crm.model.Client;
 
 import java.util.List;
 
 @AllArgsConstructor
+@Getter
 public class ClientDTO {
-    public String name;
-    public String address;
-    public List<String> phones;
+    private final String name;
+    private final String address;
+    private final List<String> phones;
 
     public static ClientDTO fromClient(Client client)
     {
