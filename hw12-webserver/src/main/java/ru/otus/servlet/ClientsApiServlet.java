@@ -32,7 +32,7 @@ public class ClientsApiServlet extends HttpServlet {
         var id = extractIdFromRequest(request);
         String result;
         if (id < 0)
-            result = gson.toJson(dbServiceClient.findAll().stream().map(c->c.toString()).toList());
+            result = gson.toJson(dbServiceClient.findAll().stream().map(ClientDTO::fromClient).toList());
         else
             result = gson.toJson(dbServiceClient.getClient(id).orElse(null));
         response.setContentType("application/json;charset=UTF-8");

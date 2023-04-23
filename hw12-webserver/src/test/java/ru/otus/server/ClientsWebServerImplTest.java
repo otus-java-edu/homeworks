@@ -21,7 +21,7 @@ import static org.mockito.Mockito.mock;
 import static ru.otus.server.utils.WebServerHelper.*;
 
 @DisplayName("Тест сервера должен ")
-class UsersWebServerImplTest {
+class ClientsWebServerImplTest {
 
     private static final int WEB_SERVER_PORT = 8989;
     private static final String WEB_SERVER_URL = "http://localhost:" + WEB_SERVER_PORT + "/";
@@ -35,7 +35,7 @@ class UsersWebServerImplTest {
     private static final String INCORRECT_USER_LOGIN = "BadUser";
 
     private static Gson gson;
-    private static UsersWebServer webServer;
+    private static ClientsWebServer webServer;
     private static HttpClient http;
 
     @BeforeAll
@@ -52,7 +52,7 @@ class UsersWebServerImplTest {
         given(userDao.findById(DEFAULT_USER_ID)).willReturn(Optional.of(DEFAULT_USER));
 
         gson = new GsonBuilder().serializeNulls().create();
-        webServer = new UsersWebServerWithFilterBasedSecurity(WEB_SERVER_PORT, userAuthService, dbServiceClient, gson, templateProcessor);
+        webServer = new ClientsWebServerWithFilterBasedSecurity(WEB_SERVER_PORT, userAuthService, dbServiceClient, gson, templateProcessor);
         webServer.start();
     }
 

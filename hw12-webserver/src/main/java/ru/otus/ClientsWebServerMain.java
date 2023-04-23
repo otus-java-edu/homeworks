@@ -13,8 +13,8 @@ import ru.otus.crm.model.Phone;
 import ru.otus.crm.service.DbServiceClientImpl;
 import ru.otus.dao.InMemoryUserDao;
 import ru.otus.dao.UserDao;
-import ru.otus.server.UsersWebServer;
-import ru.otus.server.UsersWebServerWithFilterBasedSecurity;
+import ru.otus.server.ClientsWebServer;
+import ru.otus.server.ClientsWebServerWithFilterBasedSecurity;
 import ru.otus.services.TemplateProcessor;
 import ru.otus.services.TemplateProcessorImpl;
 import ru.otus.services.UserAuthService;
@@ -32,7 +32,7 @@ import ru.otus.services.UserAuthServiceImpl;
     // REST сервис
     http://localhost:8080/api/user/3
 */
-public class WebServerWithFilterBasedSecurityDemo {
+public class ClientsWebServerMain {
     private static final int WEB_SERVER_PORT = 8080;
     private static final String TEMPLATES_DIR = "/templates/";
     public static final String HIBERNATE_CFG_FILE = "hibernate.cfg.xml";
@@ -57,10 +57,10 @@ public class WebServerWithFilterBasedSecurityDemo {
         TemplateProcessor templateProcessor = new TemplateProcessorImpl(TEMPLATES_DIR);
         UserAuthService authService = new UserAuthServiceImpl(userDao);
 
-        UsersWebServer usersWebServer = new UsersWebServerWithFilterBasedSecurity(WEB_SERVER_PORT,
+        ClientsWebServer clientsWebServer = new ClientsWebServerWithFilterBasedSecurity(WEB_SERVER_PORT,
                 authService, dbServiceClient, gson, templateProcessor);
 
-        usersWebServer.start();
-        usersWebServer.join();
+        clientsWebServer.start();
+        clientsWebServer.join();
     }
 }
