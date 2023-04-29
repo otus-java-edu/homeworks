@@ -1,0 +1,38 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Клиенты</title>
+    <script>
+        function createClient() {
+            const clientNameTextBox = document.getElementById('clientNameTextBox');
+            const clientAddressTextBox = document.getElementById('clientAddressTextBox');
+            const clientPhoneTextBox = document.getElementById('clientPhoneTextBox');
+            const clientDataContainer = document.getElementById('clientDataContainer');
+            const clientName = clientNameTextBox.value;
+            const clientAddress = clientAddressTextBox.value;
+            const clientPhone = clientPhoneTextBox.value;
+            fetch('api/client/', {method: "post",headers: {'Accept': 'application/json','Content-Type': 'application/json'},
+              body: JSON.stringify({name: clientName,address: clientAddress, phones: [clientPhone]})})
+                .then(response => response.json())
+                .then(user => clientDataContainer.innerHTML = JSON.stringify(user));
+        }
+        function refreshClientsList() {
+            fetch('api/client/')
+                .then(response => response.json())
+                .then(users => clientsDataContainer.innerHTML = JSON.stringify(users));
+        }
+    </script>
+</head>
+
+<body>
+<h4>Создать клиента</h4>
+<input type="text" id = "clientNameTextBox" value="Client Name" placeholder="Введите имя клиента">
+<input type="text" id = "clientAddressTextBox" value="Client Address" placeholder="Введите адрес клиента">
+<input type="text" id = "clientPhoneTextBox" value="Client Phone" placeholder="Введите телефон клиента">
+<button onclick="createClient()">Создать</button>
+<pre id = "clientDataContainer"></pre>
+
+<h4>Список клиентов</h4>
+<button onclick="refreshClientsList()">Обновить список</button>
+<pre id = "clientsDataContainer"></pre>
+</body>
+</html>
