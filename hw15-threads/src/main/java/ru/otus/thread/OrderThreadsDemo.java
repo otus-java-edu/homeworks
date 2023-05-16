@@ -8,7 +8,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class OrderThreadsDemo {
 
     private final AtomicInteger syncer = new AtomicInteger();
-    private final int lockValue = -1;
     private static final Logger logger = LoggerFactory.getLogger(OrderThreadsDemo.class);
 
     public static void main(String[] args){
@@ -37,17 +36,18 @@ public class OrderThreadsDemo {
         try {
             var i = 1;
             var increment = 1;
-            while(true){
-                if (syncer.compareAndSet(value, lockValue))
-                {
+            while(Thread.currentThread().isInterrupted()){
+                int lockValue = -1;
+                if (syncer.compareAndSet(value, lockValue)) {
                     System.out.println(Thread.currentThread().getName() + ": " + i);
                     i+= increment;
                     if (i % 9 == 1)
                         increment *= -1;
                     syncer.set(next);
                 }
-                else
+                else {
                     Thread.sleep(400);
+                }
             }
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
