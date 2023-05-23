@@ -1,0 +1,41 @@
+plugins {
+    id 'java'
+}
+
+group 'ru.otus'
+version 'unspecified'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation("io.github.binance:binance-futures-connector-java:3.0.1")
+    implementation("org.jetbrains:annotations:17.0.0")
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+    implementation("org.springframework.boot:spring-boot-starter-test")
+    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+    implementation("ch.qos.logback:logback-classic")
+    implementation("com.google.code.gson:gson:${Versions.gson}")
+
+    implementation("org.freemarker:freemarker:${Versions.freemarker}")
+
+    testImplementation("org.junit.jupiter:junit-jupiter-engine")
+    testImplementation("org.junit.jupiter:junit-jupiter-params")
+    testImplementation("org.assertj:assertj-core")
+    testImplementation("org.mockito:mockito-junit-jupiter")
+
+    implementation('org.flywaydb:flyway-core')
+
+    implementation("org.postgresql:postgresql")
+
+    testImplementation("com.h2database:h2")
+
+    testImplementation("org.testcontainers:junit-jupiter")
+    testImplementation("org.testcontainers:postgresql")
+}
+
+test {
+    useJUnitPlatform()
+}

@@ -21,4 +21,5 @@ include 'hw18-webflux:client-service'
 findProject(':hw18-webflux:client-service')?.name = 'client-service'
 include 'hw18-webflux:datastore-service'
 findProject(':hw18-webflux:datastore-service')?.name = 'datastore-service'
+include 'project'
 
