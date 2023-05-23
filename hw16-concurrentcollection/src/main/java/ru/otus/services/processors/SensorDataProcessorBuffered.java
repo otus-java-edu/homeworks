@@ -6,26 +6,26 @@ import ru.otus.lib.SensorDataBufferedWriter;
 import ru.otus.api.SensorDataProcessor;
 import ru.otus.api.model.SensorData;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ConcurrentSkipListSet;
+import java.util.concurrent.ArrayBlockingQueue;
 
 public class SensorDataProcessorBuffered implements SensorDataProcessor {
     private static final Logger log = LoggerFactory.getLogger(SensorDataProcessorBuffered.class);
 
     private final int bufferSize;
-    private final ConcurrentSkipListSet<SensorData> dataBuffer = new ConcurrentSkipListSet<>();
+    private final ArrayBlockingQueue<SensorData> dataBuffer;
     private final SensorDataBufferedWriter writer;
 
     public SensorDataProcessorBuffered(int bufferSize, SensorDataBufferedWriter writer) {
         this.bufferSize = bufferSize;
         this.writer = writer;
+        dataBuffer = new ArrayBlockingQueue<>(bufferSize);
     }
 
     @Override
     public void process(SensorData data) {
-        synchronized (dataBuffer) {
-            dataBuffer.add(data);
-        }
+        dataBuffer.add(data);
 
         if (dataBuffer.size() >= bufferSize) {
             flush();
@@ -34,13 +34,11 @@ public class SensorDataProcessorBuffered implements SensorDataProcessor {
 
     public void flush() {
         try {
-            List<SensorData> data;
-            synchronized (dataBuffer) {
-                if (dataBuffer.size() == 0)
-                    return;
-                data = dataBuffer.stream().toList();
-                dataBuffer.clear();
-            }
+            if (dataBuffer.size() == 0)
+                return;
+            List<SensorData> data = new ArrayList<>();
+            dataBuffer.drainTo(data);
+            data.sort(SensorData::compareTo);
             writer.writeBufferedData(data);
         } catch (Exception e) {
             log.error("Ошибка в процессе записи буфера", e);
