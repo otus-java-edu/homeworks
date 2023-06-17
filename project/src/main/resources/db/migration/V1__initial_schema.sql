@@ -52,8 +52,7 @@ create table pnl
 
 alter table pnl add primary key (user_id, symbol_id, time);
 
-insert into symbols (name) values ('bnbbusd'), ('bnbusdt'), ('adabusd'), ('adausdt'), ('btcbusd'), ('btcusdt'), ('ethbusd'), ('ethusdt'),
-('etcbusd'), ('etcusdt'), ('dogebusd'), ('dogeusdt'), ('ltcbusd'), ('ltcusdt'), ('xrpbusd'), ('xrpusdt'),
-('filbusd'), ('filusdt'), ('egldusdt'), ('maticbusd'), ('maticusdt'), ('trxbusd'), ('trxusdt'),
-('ftmbusd'), ('ftmusdt'), ('galabusd'), ('galausdt'), ('avaxbusd'), ('avaxusdt');
+insert into symbols (name) values ('bnbbusd'),('bnbusdt'),('adabusd'),('adausdt'),('btcbusd'),('btcusdt'),('ethbusd'),
+('ethusdt'),('etcbusd'),('etcusdt'),('dogebusd'),('ltcbusd'),('ltcusdt'),('xrpbusd'),('filbusd'),('filusdt'),
+('maticbusd'),('trxbusd'),('trxusdt'),('ftmbusd');
 
