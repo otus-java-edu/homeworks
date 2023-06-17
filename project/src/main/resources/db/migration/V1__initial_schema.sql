@@ -39,12 +39,6 @@ create table user_data
 
 alter table user_data add primary key (user_id, symbol_id);
 
-create table bnb_data
-(
-    time                bigint not null primary key,
-    price               real
-);
-
 create table pnl
 (
     user_id             integer,

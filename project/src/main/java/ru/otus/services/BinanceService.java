@@ -37,8 +37,7 @@ public class BinanceService {
         try {
             var stringResult = client.account().accountTradeList(parameters);
             stringResult = stringResult.replace("BUY", "1").replace("SELL", "-1");
-            var result = (ArrayList<Trade>)gson.fromJson(stringResult, new TypeToken<ArrayList<Trade>>(){}.getType());
-            return result;
+            return gson.fromJson(stringResult, new TypeToken<ArrayList<Trade>>(){}.getType());
         } catch (BinanceConnectorException e) {
             log.error("fullErrMessage: {}", e.getMessage(), e);
             return null;
