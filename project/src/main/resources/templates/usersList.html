@@ -2,10 +2,10 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>List of all clients</title>
+    <title>List of all users</title>
 
     <script>
-        function getClient(url, valueControlName) {
+        function getUser(url, valueControlName) {
             const valueControl = document.getElementById(valueControlName);
             const clientDataContainer = document.getElementById('clientDataContainer');
             const fullUrl = url + (valueControl? (encodeURIComponent(valueControl.value)) : '');
@@ -21,7 +21,7 @@
             padding: 50px;
         }
 
-        .clients, .clients td {
+        .users, .users td {
             border: 1px solid lightgray;
             padding: 5px;
             margin-bottom: 10px;
@@ -71,52 +71,26 @@
     </style>
 </head>
 <body>
-<h3>Клиенты:</h3>
+<h3>Users:</h3>
 
-<table class="clients">
+<table class="users">
     <thead>
     <tr>
         <th>ID</th>
         <th>Name</th>
-        <th>Address</th>
-        <th>Phones</th>
+        <th>Api Key</th>
+        <th>Secret Key</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="client : ${clients}">
-        <td th:text="${client.id}"></td>
-        <td th:text="${client.name}"></td>
-        <td th:text="${client.address}"></td>
-        <td th:text="${client.phones}"></td>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.name}"></td>
+        <td th:text="${user.apiKey}"></td>
+        <td th:text="${user.secretKey}"></td>
     </tr>
     </tbody>
 </table>
-<a th:href="@{/client/create}" href="clientCreate.html">New client</a>
-
-<br/><br/>
-
-<br/><br/>
-<h3>API:</h3>
-
-<div class="controls-container">
-    <input type="text" id="clientIdTextBox" value="3" placeholder="Введите id клиента">
-    <button onclick="getClient('api/client/', 'clientIdTextBox')">Получить клиента по id</button>
-</div>
-
-<pre id="clientDataContainer"></pre>
-
-<h3>Данные о системе:</h3>
-<span th:text="${osData}"></span>
-
-<h3>Сообщение из настроек (application.yml):</h3>
-<span th:text="${applicationYmlMessage}"></span>
-<br/>
-<span th:text="${@environment.getProperty('app.client-list-page.msg2')}"></span>
-
-<h3>Тест View без контроллера:</h3>
-<a th:href="@{/no-handler-view}">Перейти на View без контроллера</a>
-
-<br/><br/>
-
+<a th:href="@{/user/create}" href="userCreate.html">New user</a>
 </body>
 </html>

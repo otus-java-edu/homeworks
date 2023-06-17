@@ -10,6 +10,8 @@ repositories {
 }
 
 dependencies {
+    implementation 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
     implementation("io.github.binance:binance-futures-connector-java:3.0.1")
     implementation("org.jetbrains:annotations:17.0.0")
     implementation("org.springframework.boot:spring-boot-starter-web")
